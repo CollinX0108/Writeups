@@ -1,50 +1,51 @@
 name: Generate PDF from Markdown
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'HTB/**/*.md'
+# Workflow deshabilitado temporalmente
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'HTB/**/*.md'
 
 jobs:
   generate-pdf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Workflow deshabilitado
+        run: echo "Workflow deshabilitado temporalmente"
       
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended texlive-latex-extra
-      
-      - name: Download EISVOGEL template
-        run: |
-          mkdir -p ~/.pandoc/templates
-          # Clonar el repositorio temporalmente para obtener el template
-          git clone --depth 1 https://github.com/Wandmalfarbe/pandoc-latex-template.git /tmp/pandoc-template
-          # Copiar el template simple (no requiere archivos adicionales)
-          cp /tmp/pandoc-template/eisvogel.latex ~/.pandoc/templates/eisvogel.latex
-          # Verificar que se copió correctamente
-          if [ ! -f ~/.pandoc/templates/eisvogel.latex ] || [ ! -s ~/.pandoc/templates/eisvogel.latex ]; then
-            echo "Error: No se pudo obtener el template"
-            exit 1
-          fi
-          ls -lh ~/.pandoc/templates/eisvogel.latex
-          echo "Template instalado correctamente"
-      
-      - name: Generate PDFs
-        run: |
-          find HTB -name "writeup.md" | while read file; do
-            dir=$(dirname "$file")
-            cd "$dir"
-            pandoc --pdf-engine=xelatex writeup.md -o writeup.pdf --template eisvogel --listings
-            cd - > /dev/null
-          done
-      
-      - name: Upload PDFs
-        uses: actions/upload-artifact@v4
-        with:
-          name: pdf-writeups
-          path: HTB/**/*.pdf
+      # - uses: actions/checkout@v4
+      # 
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended texlive-latex-extra
+      # 
+      # - name: Download EISVOGEL template
+      #   run: |
+      #     mkdir -p ~/.pandoc/templates
+      #     git clone --depth 1 https://github.com/Wandmalfarbe/pandoc-latex-template.git /tmp/pandoc-template
+      #     cp /tmp/pandoc-template/eisvogel.latex ~/.pandoc/templates/eisvogel.latex
+      #     if [ ! -f ~/.pandoc/templates/eisvogel.latex ] || [ ! -s ~/.pandoc/templates/eisvogel.latex ]; then
+      #       echo "Error: No se pudo obtener el template"
+      #       exit 1
+      #     fi
+      #     ls -lh ~/.pandoc/templates/eisvogel.latex
+      #     echo "Template instalado correctamente"
+      # 
+      # - name: Generate PDFs
+      #   run: |
+      #     find HTB -name "writeup.md" | while read file; do
+      #       dir=$(dirname "$file")
+      #       cd "$dir"
+      #       pandoc --pdf-engine=xelatex writeup.md -o writeup.pdf --template eisvogel --listings
+      #       cd - > /dev/null
+      #     done
+      # 
+      # - name: Upload PDFs
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: pdf-writeups
+      #     path: HTB/**/*.pdf
