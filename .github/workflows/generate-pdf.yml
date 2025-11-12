@@ -1,0 +1,36 @@
+name: Generate PDF from Markdown
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'HTB/**/*.md'
+
+jobs:
+  generate-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Pandoc
+        uses: pandoc/setup-pandoc@v2
+        with:
+          pandoc-version: 'latest'
+      
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
+      
+      - name: Generate PDFs
+        run: |
+          find HTB -name "writeup.md" -exec sh -c 'pandoc "$1" -o "${1%.md}.pdf" --from markdown --template eisvogel --listings' _ {} \;
+      
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v3
+        with:
+          name: pdf-writeups
+          path: HTB/**/*.pdf
+
