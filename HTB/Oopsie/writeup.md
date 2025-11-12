@@ -493,3 +493,7 @@ Esta máquina fue una excelente introducción a técnicas comunes de explotació
 2. [Hack The Box Forum](https://forum.hackthebox.com/)
 3. [Pandoc LaTeX Template](https://github.com/Wandmalfarbe/pandoc-latex-template)
 4. [Reverse Shell Generator - revshells.com](https://www.revshells.com/)
+
+# PWNED
+
+[PWNED LINK](https://labs.hackthebox.com/achievement/machine/2794675/288)

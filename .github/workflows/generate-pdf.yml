@@ -14,23 +14,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Install Pandoc and LaTeX
+      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-latex-recommended
+          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended texlive-latex-extra
       
-      - name: Setup EISVOGEL template
+      - name: Download EISVOGEL template
         run: |
           mkdir -p ~/.pandoc/templates
-          curl -L https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex -o ~/.pandoc/templates/eisvogel.tex
+          wget -q https://github.com/Wandmalfarbe/pandoc-latex-template/releases/download/3.2.1/Eisvogel-3.2.1.tar.gz -O /tmp/eisvogel.tar.gz
+          tar -xzf /tmp/eisvogel.tar.gz -C /tmp
+          cp /tmp/Eisvogel-*/eisvogel.latex ~/.pandoc/templates/eisvogel.latex
+          ls -lh ~/.pandoc/templates/eisvogel.latex
       
       - name: Generate PDFs
         run: |
-          find HTB -name "writeup.md" -exec sh -c 'pandoc "$1" -o "${1%.md}.pdf" --from markdown --template eisvogel --listings' _ {} \;
+          find HTB -name "writeup.md" | while read file; do
+            dir=$(dirname "$file")
+            cd "$dir"
+            pandoc --pdf-engine=xelatex writeup.md -o writeup.pdf --template eisvogel --listings
+            cd - > /dev/null
+          done
       
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
           name: pdf-writeups
           path: HTB/**/*.pdf
-
