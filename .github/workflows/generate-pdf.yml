@@ -12,24 +12,24 @@ jobs:
   generate-pdf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
-      - name: Setup Pandoc
-        uses: pandoc/setup-pandoc@v2
-        with:
-          pandoc-version: 'latest'
-      
-      - name: Install LaTeX
+      - name: Install Pandoc and LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
+          sudo apt-get install -y pandoc texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-latex-recommended
+      
+      - name: Setup EISVOGEL template
+        run: |
+          mkdir -p ~/.pandoc/templates
+          curl -L https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex -o ~/.pandoc/templates/eisvogel.tex
       
       - name: Generate PDFs
         run: |
           find HTB -name "writeup.md" -exec sh -c 'pandoc "$1" -o "${1%.md}.pdf" --from markdown --template eisvogel --listings' _ {} \;
       
       - name: Upload PDFs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pdf-writeups
           path: HTB/**/*.pdf
