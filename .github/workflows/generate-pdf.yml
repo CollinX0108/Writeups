@@ -22,10 +22,25 @@ jobs:
       - name: Download EISVOGEL template
         run: |
           mkdir -p ~/.pandoc/templates
-          wget -q https://github.com/Wandmalfarbe/pandoc-latex-template/releases/download/3.2.1/Eisvogel-3.2.1.tar.gz -O /tmp/eisvogel.tar.gz
+          # Descargar el template desde el release
+          curl -L https://github.com/Wandmalfarbe/pandoc-latex-template/releases/download/3.2.1/Eisvogel-3.2.1.tar.gz -o /tmp/eisvogel.tar.gz
+          # Verificar que se descargó
+          if [ ! -f /tmp/eisvogel.tar.gz ]; then
+            echo "Error: No se pudo descargar el template"
+            exit 1
+          fi
+          # Extraer
           tar -xzf /tmp/eisvogel.tar.gz -C /tmp
-          cp /tmp/Eisvogel-*/eisvogel.latex ~/.pandoc/templates/eisvogel.latex
+          # Buscar y copiar el archivo eisvogel.latex
+          TEMPLATE_FILE=$(find /tmp -name "eisvogel.latex" | head -1)
+          if [ -z "$TEMPLATE_FILE" ]; then
+            echo "Error: No se encontró eisvogel.latex en el archivo descargado"
+            ls -la /tmp/
+            exit 1
+          fi
+          cp "$TEMPLATE_FILE" ~/.pandoc/templates/eisvogel.latex
           ls -lh ~/.pandoc/templates/eisvogel.latex
+          echo "Template instalado correctamente"
       
       - name: Generate PDFs
         run: |
