@@ -18,7 +18,17 @@ Writeups/
 
 ## Máquinas Resueltas
 
-- [Oopsie](./HTB/Oopsie/writeup.md)
+- [Oopsie](./HTB/Oopsie/writeup.md) - [PWNED](https://labs.hackthebox.com/achievement/machine/2794675/288) - 12 Nov 2025
+- [Archetype - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/287) - 05 Nov 2025
+- [Three - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/489) - 03 Nov 2025
+- [Responder - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/461) - 31 Oct 2025
+- [Crocodile - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/404) - 31 Oct 2025
+- [Sequel - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/403) - 30 Oct 2025
+- [Appointment - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/402) - 30 Oct 2025
+- [Redeemer - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/472) - 29 Oct 2025
+- [Dancing - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/395) - 29 Oct 2025
+- [Fawn - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/393) - 29 Oct 2025
+- [Meow - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/394) - 29 Oct 2025
 
 ## Notas
 
