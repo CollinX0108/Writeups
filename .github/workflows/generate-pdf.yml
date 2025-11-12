@@ -22,11 +22,13 @@ jobs:
       - name: Download EISVOGEL template
         run: |
           mkdir -p ~/.pandoc/templates
-          # Descargar el template directamente desde el repositorio
-          curl -L https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/refs/heads/master/template-multi-file/eisvogel.latex -o ~/.pandoc/templates/eisvogel.latex
-          # Verificar que se descargó correctamente (debe ser > 20KB)
+          # Clonar el repositorio temporalmente para obtener el template
+          git clone --depth 1 https://github.com/Wandmalfarbe/pandoc-latex-template.git /tmp/pandoc-template
+          # Copiar el template simple (no requiere archivos adicionales)
+          cp /tmp/pandoc-template/eisvogel.latex ~/.pandoc/templates/eisvogel.latex
+          # Verificar que se copió correctamente
           if [ ! -f ~/.pandoc/templates/eisvogel.latex ] || [ ! -s ~/.pandoc/templates/eisvogel.latex ]; then
-            echo "Error: No se pudo descargar el template"
+            echo "Error: No se pudo obtener el template"
             exit 1
           fi
           ls -lh ~/.pandoc/templates/eisvogel.latex
