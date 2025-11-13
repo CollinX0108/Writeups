@@ -18,6 +18,7 @@ Writeups/
 
 ## Máquinas Resueltas
 
+- [Vaccine](./HTB/Vaccine/writeup.md) - [PWNED](https://labs.hackthebox.com/achievement/machine/2794675/289) - 13 Nov 2025
 - [Oopsie](./HTB/Oopsie/writeup.md) - [PWNED](https://labs.hackthebox.com/achievement/machine/2794675/288) - 12 Nov 2025
 - [Archetype - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/287) - 05 Nov 2025
 - [Three - NoWriteup](https://labs.hackthebox.com/achievement/machine/2794675/489) - 03 Nov 2025
