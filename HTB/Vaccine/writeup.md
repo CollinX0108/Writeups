@@ -451,6 +451,18 @@ dd6e058e814260bc70e9bbdef2715849
 
 \ **Figure 6:** Root flag obtenida
 
+# Vulnerabilidades Encontradas
+
+1. **FTP con Login Anónimo Habilitado**: El servicio FTP permite acceso anónimo sin autenticación, exponiendo archivos sensibles como `backup.zip` que contienen información crítica del sistema.
+
+2. **Archivo ZIP Protegido con Contraseña Débil**: El archivo `backup.zip` está protegido con una contraseña débil que puede ser descifrada mediante fuerza bruta usando herramientas como `zip2john` y `John the Ripper`.
+
+3. **Credenciales Hardcodeadas**: Las credenciales de administrador están hardcodeadas en el código fuente PHP, almacenadas como hash MD5, un algoritmo de hash inseguro y obsoleto que puede ser descifrado fácilmente.
+
+4. **SQL Injection**: La aplicación web es vulnerable a inyección SQL en el parámetro `search` del endpoint `/dashboard.php`, permitiendo la ejecución de comandos arbitrarios mediante `sqlmap` y obtención de una shell remota.
+
+5. **Permisos Sudo Mal Configurados**: El usuario `postgres` tiene permisos sudo para ejecutar `vi` sin restricciones, permitiendo la escalada de privilegios mediante la técnica de GTFOBins para obtener una shell como root.
+
 # Conclusion
 
 La máquina **Vaccine** fue una excelente práctica que me mostró varios conceptos importantes de seguridad web, criptografía y escalada de privilegios en Linux.

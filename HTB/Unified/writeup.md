@@ -466,6 +466,16 @@ root@unified:~#
 
 Obtuvimos la flag del root, y la escalada fue exitosa.
 
+# Vulnerabilidades Encontradas
+
+1. **Log4Shell (CVE-2021-44228)**: El sistema utiliza una versión vulnerable de Log4j que procesa lookups JNDI sin validación adecuada. El parámetro `remember` en las peticiones de login es registrado en logs y procesado por Log4j, permitiendo la ejecución remota de código mediante servidores LDAP maliciosos.
+
+2. **MongoDB sin Autenticación**: La base de datos MongoDB está configurada sin autenticación, permitiendo acceso local sin credenciales. Esto permite la enumeración y modificación de datos, incluyendo credenciales de administrador.
+
+3. **Almacenamiento Inseguro de Credenciales**: Las contraseñas de administrador se almacenan como hashes SHA-512 en la base de datos MongoDB sin protección adicional, permitiendo su modificación directa cuando se tiene acceso a la base de datos.
+
+4. **Falta de Validación de Entradas en Logs**: La aplicación registra entradas controladas por el usuario (como el parámetro `remember`) sin sanitización, lo que permite la explotación de vulnerabilidades como Log4Shell cuando estas entradas son procesadas por bibliotecas vulnerables.
+
 # Conclusion
 
 La máquina **Unified** fue una excelente práctica que me mostró varios conceptos importantes de seguridad web, vulnerabilidades críticas en bibliotecas Java y escalada de privilegios mediante bases de datos.

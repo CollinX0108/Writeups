@@ -304,6 +304,18 @@ root@cap:/root# cat root.txt
 
 Obtuvimos la flag de root, y la escalada fue exitosa.
 
+# Vulnerabilidades Encontradas
+
+1. **IDOR (Insecure Direct Object Reference)**: El endpoint `/data/{id}` permite acceder a capturas de tráfico anteriores mediante enumeración de IDs. No existe validación adecuada que impida acceder a capturas de otros usuarios o capturas históricas simplemente cambiando el identificador en la URL.
+
+2. **Exposición de Información Sensible**: Las capturas de tráfico de red almacenadas en el sistema contienen información sensible (credenciales FTP) y son accesibles sin autenticación adecuada o controles de acceso.
+
+3. **Transmisión de Credenciales en Texto Plano**: El protocolo FTP transmite credenciales sin encriptación, permitiendo que sean capturadas y analizadas fácilmente mediante herramientas como `tshark` o `wireshark`.
+
+4. **Reutilización de Credenciales**: La misma contraseña funciona tanto para FTP como para SSH, lo que amplifica el impacto de una filtración de credenciales.
+
+5. **Capabilities Mal Configuradas**: El binario `python3.8` tiene la capability `cap_setuid` asignada, lo que permite escalada de privilegios mediante la función `os.setuid(0)` sin necesidad de ejecutar el binario como root.
+
 # Conclusion
 
 La máquina **Cap** fue una excelente práctica que me mostró varios conceptos importantes de seguridad web, análisis de tráfico de red y escalada de privilegios mediante capabilities de Linux.

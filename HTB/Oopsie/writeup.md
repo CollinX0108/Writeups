@@ -457,6 +457,16 @@ root.txt (END)
 
 \ **Figure 14:** Root flag obtenida
 
+# Vulnerabilidades Encontradas
+
+1. **Bypass de Autenticación mediante Manipulación de Cookies**: La aplicación confía en el valor de la cookie `role` para determinar los privilegios del usuario, permitiendo que un usuario `guest` se eleve a `admin` simplemente modificando el valor de la cookie sin validación adecuada en el servidor.
+
+2. **File Upload sin Validación Adecuada**: La funcionalidad de carga de archivos permite subir archivos PHP sin validación estricta de tipo de archivo o contenido, permitiendo la ejecución de código remoto mediante webshells.
+
+3. **Credenciales Hardcodeadas**: Las credenciales de base de datos y del usuario `robert` están hardcodeadas en archivos de configuración PHP (`db.php`, `admin.php`), exponiendo información sensible en el código fuente.
+
+4. **PATH Hijacking en Binario SUID**: El binario `bugtracker` tiene el bit SUID activado y utiliza comandos del sistema sin rutas absolutas, permitiendo la manipulación de la variable de entorno `PATH` para ejecutar código malicioso con privilegios elevados.
+
 # Conclusion
 
 La máquina **Oopsie** fue una excelente práctica que me mostró varios conceptos importantes de seguridad web y escalada de privilegios en Linux.
