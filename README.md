@@ -18,6 +18,7 @@ Writeups/
 
 ## Máquinas Resueltas
 
+- [TwoMillion](./HTB/TwoMillion/writeup.md) - [PWNED](https://labs.hackthebox.com/achievement/machine/2794675/547) - 17 Nov 2025
 - [Cap](./HTB/Cap/writeup.md) - [PWNED](https://labs.hackthebox.com/achievement/machine/2794675/351) - 15 Nov 2025
 - [Unified](./HTB/Unified/writeup.md) - [PWNED](https://labs.hackthebox.com/achievement/machine/2794675/441) - 14 Nov 2025
 - [Vaccine](./HTB/Vaccine/writeup.md) - [PWNED](https://labs.hackthebox.com/achievement/machine/2794675/289) - 13 Nov 2025
